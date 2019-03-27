@@ -1,13 +1,29 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
+import QuotePageList from './QuotePageList';
+import {loadQuotes} from '../actions/quotepage';
 
-export default class QuotePage extends React{
+class QuotePage extends Component{
 
     componentDidMount(){
-        //actiondan fetch yapacak özlü sözleri
+        this.props.loadQuotes();
+    }
+
+    getRandomQuote = (allQuotes) => {
+        //console.log(allQuotes[Math.floor(Math.random()*allQuotes.length)]);
+        return allQuotes[Math.floor(Math.random()*allQuotes.length)];
     }
 
     render(){
-        return;
+        return(
+            <QuotePageList
+                getRandomQuote={this.getRandomQuote(this.props.quotes)}/>
+        );
     }
 }
+
+const mapStateToProps = (state) => ({
+    quotes: state
+});
+
+export default connect(mapStateToProps, {loadQuotes})(QuotePage)
