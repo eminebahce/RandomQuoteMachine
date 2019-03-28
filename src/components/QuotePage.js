@@ -10,14 +10,15 @@ class QuotePage extends Component{
     }
 
     getRandomQuote = (allQuotes) => {
-        //console.log(allQuotes[Math.floor(Math.random()*allQuotes.length)]);
         return allQuotes[Math.floor(Math.random()*allQuotes.length)];
     }
 
     render(){
         return(
             <QuotePageList
-                getRandomQuote={this.getRandomQuote(this.props.quotes)}/>
+                getRandom={this.getRandomQuote(this.props.quotes)}
+                quotes={this.props.quotes}
+            />
         );
     }
 }

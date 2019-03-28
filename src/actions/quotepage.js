@@ -6,7 +6,6 @@ export const Quotes_FETCHED = 'Quotes_FETCHED';
 export const loadQuotes = () =>{
     return(dispatch) => {
         request(baseURL).then(response => {
-            //console.log(JSON.parse(response.text));
             dispatch(quotesFetched(JSON.parse(response.text)));
         }).catch(error => console.log(error));
     }
