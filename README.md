@@ -1,4 +1,4 @@
-##Random Quote Machine
+## Random Quote Machine
 Created random quote machine by using React and Redux. When the page loads or clicks the new quote
 button, displays a random with a random color which matching the pages background color and quotes text color   
 
