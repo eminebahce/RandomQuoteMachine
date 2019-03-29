@@ -11,7 +11,7 @@ export default function QuotePageList(props) {
     };
 
     return (
-        <div>
+        <div className='container'>
         <div id='quoteBox'>
             {props.getRandom && (
                 <div>
