@@ -3,42 +3,49 @@ import {connect} from "react-redux";
 import QuotePageList from './QuotePageList';
 import {loadQuotes} from '../actions/quotepage';
 
-class QuotePage extends Component{
+class QuotePage extends Component {
 
-    componentDidMount(){
+    state = {
+        randomQuote: {
+            quote: 'Life isn’t about getting and having, it’s about giving and being.',
+            author: 'Kevin Kruse'
+        },
+        colors: ['#16a085', '#27ae60', '#2c3e50', '#f39c12', '#e74c3c', '#9b59b6', '#FB6964', '#342224', "#472E32", "#BDBB99", "#77B1A9", "#73A857"],
+        color: ''
+    }
+
+    componentDidMount() {
         this.props.loadQuotes();
     }
 
-    componentWillMount(){
-        document.body.style.backgroundColor = this.props.randomColor;
-        console.log();
+    getRandomQuote = () => {
+        this.setState({
+            randomQuote: this.props.quotes[Math.floor(Math.random() * this.props.quotes.length)]
+        });
     }
 
-    componentWillUnmount(){
-        document.body.style.backgroundColor = null;
+    getRandomColors = () => {
+        this.setState({
+            color: this.state.colors[Math.floor(Math.random() * this.state.colors.length)]
+        });
     }
 
-
-    getRandomQuote = (allQuotes) => {
-        return allQuotes[Math.floor(Math.random()*allQuotes.length)];
+    getRandom = () => {
+        this.getRandomQuote();
+        this.getRandomColors();
     }
 
-    getRandomColors = (colors) => {
-        const randomColor = colors[Math.floor(Math.random() * colors.length)]
-        return randomColor;
-    }
-
-    render(){
-        const colors = ['#16a085', '#27ae60', '#2c3e50', '#f39c12', '#e74c3c', '#9b59b6', '#FB6964', '#342224', "#472E32", "#BDBB99", "#77B1A9", "#73A857"];
-        return(
+    render() {
+        return (
             <QuotePageList
-                getRandom={this.getRandomQuote(this.props.quotes)}
-                quotes={this.props.quotes}
-                randomColor={this.getRandomColors(colors)}
+                randomQuote={this.state.randomQuote}
+                randomColor={this.state.color}
+                getRandom={this.getRandom}
             />
         );
     }
 }
+
 const mapStateToProps = (state) => ({
     quotes: state
 });
