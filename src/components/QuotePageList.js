@@ -1,9 +1,17 @@
 import React from 'react';
+import '../index.css';
 
 export default function QuotePageList(props) {
 
-    return (
+    document.body.style.backgroundColor = props.randomColor;
+    document.body.style.color = props.randomColor;
 
+    const buttonStyle = {
+        background: props.randomColor
+    };
+
+    return (
+        <div>
         <div id='quoteBox'>
             {props.getRandom && (
                 <div>
@@ -20,14 +28,15 @@ export default function QuotePageList(props) {
             )}
             {!props.getRandom && <li>Loading...</li>}
             <div className='buttons'>
-                <button className="button" id="tweet-quote" title="Tweet this quote!" target="_blank">
+                <button className="button" id="tweet-quote" title="Tweet this quote!" target="_blank" style={buttonStyle}>
                     <i className="fa fa-twitter"></i>
                 </button>
-                <button className="button" id="tumblr-quote" title="Post this quote on tumblr!" target="_blank">
+                <button className="button" id="tumblr-quote" title="Post this quote on tumblr!" target="_blank" style={buttonStyle}>
                     <i className="fa fa-tumblr"></i>
                 </button>
-                <button className="button" id="new-quote" onClick={() => window.location.reload()}>New quote</button>
+                <button className="button" id="new-quote" onClick={() => window.location.reload()} style={buttonStyle}>New quote</button>
             </div>
+        </div>
         </div>
     );
 }
